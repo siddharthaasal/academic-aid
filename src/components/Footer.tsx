@@ -1,45 +1,28 @@
-const links = [
-    {
-        title: 'Features',
-        href: '#',
-    },
-    {
-        title: 'Solution',
-        href: '#',
-    },
-    {
-        title: 'Customers',
-        href: '#',
-    },
-    {
-        title: 'Pricing',
-        href: '#',
-    },
-    {
-        title: 'Help',
-        href: '#',
-    },
-    {
-        title: 'About',
-        href: '#',
-    },
-]
+interface FooterProps {
+    companyName?: string
+    termsHref?: string
+}
 
-export default function Footer() {
+export default function Footer({
+    companyName = 'academic-aid',
+    termsHref = '/terms',
+}: FooterProps) {
     return (
-        <footer className="border-b bg-white py-12 dark:bg-transparent">
-            <div className="mx-auto max-w-5xl px-6">
-                <div className="flex flex-wrap justify-between gap-6">
-                    <span className="text-muted-foreground order-last block text-center text-sm md:order-first">© {new Date().getFullYear()} Tailark, All rights reserved</span>
-                    <div className="order-first flex flex-wrap justify-center gap-6 text-sm md:order-last">
-                        {links.map((link, index) => (
-                            <a
-                                key={index}
-                                href={link.href}
-                                className="text-muted-foreground hover:text-primary block duration-150">
-                                <span>{link.title}</span>
-                            </a>
-                        ))}
+        <footer className="border-t bg-background py-4 text-sm">
+            <div className="mx-auto max-w-5xl px-4 sm:px-6">
+                <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
+                    <div className="order-2 sm:order-1">
+                        <span className="text-muted-foreground">© {new Date().getFullYear()} {companyName}. All rights reserved.</span>
+                    </div>
+
+                    <div className="order-1 sm:order-2">
+                        <a
+                            href={termsHref}
+                            className="text-muted-foreground hover:text-foreground rounded px-2 py-1"
+                            aria-label="Terms and Conditions"
+                        >
+                            Terms &amp; Conditions
+                        </a>
                     </div>
                 </div>
             </div>

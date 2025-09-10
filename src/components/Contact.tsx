@@ -28,23 +28,16 @@ const Contact = ({
     phone = "+91-6283468927",
 }: Contact7Props) => {
     return (
-        <section className="bg-background py-32">
+        <section className="bg-background">
             <div className="container">
-                {/* <div className="mb-14">
-                    <h1 className="mb-3 mt-2 text-balance text-3xl font-semibold md:text-4xl">
-                        {title}
-                    </h1>
-                    <p className="text-muted-foreground max-w-xl text-lg">
-                        {description}
-                    </p>
-                </div> */}
+
                 <div className="mx-auto mb-10 max-w-2xl text-center">
                     <h2 className="text-3xl font-semibold md:text-4xl">{title}</h2>
                     <p className="text-muted-foreground mt-3">
                         {description}
                     </p>
                 </div>
-                <div className="grid gap-6 md:grid-cols-2">
+                <div className="grid gap-6 md:grid-cols-2 mx-8">
                     <div className="bg-muted rounded-lg p-6">
                         <span className="bg-accent mb-3 flex size-12 flex-col items-center justify-center rounded-full">
                             <Mail className="h-6 w-auto" />
@@ -58,16 +51,7 @@ const Contact = ({
                             {email}
                         </a>
                     </div>
-                    {/* <div className="bg-muted rounded-lg p-6">
-                        <span className="bg-accent mb-3 flex size-12 flex-col items-center justify-center rounded-full">
-                            <MapPin className="h-6 w-auto" />
-                        </span>
-                        <p className="mb-2 text-lg font-semibold">{officeLabel}</p>
-                        <p className="text-muted-foreground mb-3">{officeDescription}</p>
-                        <a href="#" className="font-semibold hover:underline">
-                            {officeAddress}
-                        </a>
-                    </div> */}
+
                     <div className="bg-muted rounded-lg p-6">
                         <span className="bg-accent mb-3 flex size-12 flex-col items-center justify-center rounded-full">
                             <Phone className="h-6 w-auto" />
@@ -78,16 +62,6 @@ const Contact = ({
                             {phone}
                         </a>
                     </div>
-                    {/* <div className="bg-muted rounded-lg p-6">
-                        <span className="bg-accent mb-3 flex size-12 flex-col items-center justify-center rounded-full">
-                            <MessageCircle className="h-6 w-auto" />
-                        </span>
-                        <p className="mb-2 text-lg font-semibold">{chatLabel}</p>
-                        <p className="text-muted-foreground mb-3">{chatDescription}</p>
-                        <a href="#" className="font-semibold hover:underline">
-                            {chatLink}
-                        </a>
-                    </div> */}
                 </div>
             </div>
         </section>

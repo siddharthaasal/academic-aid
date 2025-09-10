@@ -5,7 +5,7 @@ import { BookOpen } from 'lucide-react';
 export default function Testimonials() {
 
     return (
-        <section className="py-16 md:py-32">
+        <section className="">
             <div className="mx-auto max-w-6xl space-y-8 px-6 md:space-y-16">
                 <div className="mx-auto mb-10 max-w-2xl text-center">
                     <h2 className="text-3xl font-semibold md:text-4xl">Trusted by students</h2>
@@ -22,7 +22,7 @@ export default function Testimonials() {
                         </CardHeader>
                         <CardContent>
                             <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
-                                <p className="text-2xl font-medium">Paper ko mera professor ne accept kar liya — IEEE formatting exactly jaise bola tha. Time par mila aur clarity top-class. Highly recommended.</p>
+                                <p className="text-2xl ">Paper ko mera professor ne accept kar liya — IEEE formatting exactly jaise bola tha. Time par mila aur clarity top-class. Highly recommended.</p>
 
                                 <div className="grid grid-cols-[auto_1fr] items-center gap-3">
                                     <Avatar className="size-12">
@@ -47,7 +47,7 @@ export default function Testimonials() {
                     <Card className="md:col-span-2">
                         <CardContent className="h-full pt-6">
                             <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
-                                <p className="text-xl font-medium">Published my chapter with their help. Submission process was confusing but team handled references and submission mail.</p>
+                                <p className="text-xl">Published my chapter with their help. Submission process was confusing but team handled references and submission mail.</p>
 
                                 <div className="grid grid-cols-[auto_1fr] items-center gap-3">
                                     <Avatar className="size-12">
@@ -109,7 +109,7 @@ export default function Testimonials() {
                                         <AvatarFallback>NP</AvatarFallback>
                                     </Avatar>
                                     <div>
-                                        <p className="text-sm font-medium">Nisha Patel</p>
+                                        <cite className="text-sm font-medium">Nisha Patel</cite>
                                         <span className="text-muted-foreground block text-sm">Project Report</span>
                                     </div>
                                 </div>

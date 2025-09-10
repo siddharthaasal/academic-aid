@@ -25,8 +25,8 @@ export default function ServiceCard({
     description = "Short description of the service.",
     items = [],
     startingAt = "$100",
-    ctaLabel = "Get Started",
-    onCTA,
+    // ctaLabel = "Get Started",
+    // onCTA,
     className,
 }: ServiceCardProps) {
 
@@ -151,8 +151,8 @@ export default function ServiceCard({
                 </div>
 
                 {/* Minimal CTA as a link */}
-                <a
-                    href="#"
+                {/* <a
+                    href="/coming-soon"
                     onClick={(e) => {
                         e.preventDefault();
                         onCTA?.();
@@ -161,8 +161,7 @@ export default function ServiceCard({
                     className="inline-flex items-center gap-1 text-sm font-medium text-accent-600 hover:underline dark:text-accent-400"
                 >
                     <span>{ctaLabel}</span>
-                    {/* <ArrowRight className="h-4 w-4" /> */}
-                </a>
+                </a> */}
             </div>
 
         </article>

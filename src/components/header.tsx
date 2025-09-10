@@ -44,9 +44,10 @@ export const Logo = ({ className = '', size = 36 }) => (
 
 
 const menuItems = [
-    { name: 'Services', href: '#link' },
-    { name: 'Testimonials', href: '#link' },
-    { name: 'FAQ', href: '#link' },
+    { id: 'services', name: 'Services' },
+    { id: 'testimonials', name: 'Testimonials' },
+    { id: 'faq', name: 'FAQ' },
+    { id: 'contact', name: 'Contact' },
 ]
 
 export const HeroHeader = () => {
@@ -54,12 +55,28 @@ export const HeroHeader = () => {
     const [isScrolled, setIsScrolled] = React.useState(false)
 
     React.useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50)
-        }
+        const handleScroll = () => setIsScrolled(window.scrollY > 50)
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
+
+    // scroll to element with header offset
+    const scrollToId = (id: any) => {
+        const el = document.getElementById(id)
+        if (!el) return
+        // header offset - compute dynamically or hardcode
+        const nav = document.querySelector('nav')
+        const headerOffset = nav ? nav.offsetHeight : 50
+        const elementPosition = el.getBoundingClientRect().top + window.pageYOffset
+        const offsetPosition = elementPosition - headerOffset  // extra gap
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
+    }
+
+    const handleNavClick = (e: any, id: any) => {
+        e.preventDefault() // prevent default anchor jump
+        setMenuState(false) // close mobile menu
+        scrollToId(id)
+    }
 
     return (
         <header>
@@ -72,7 +89,6 @@ export const HeroHeader = () => {
                 >
                     <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
                         <div className="flex w-full justify-between lg:w-auto">
-                            {/* replace <a> with your router Link if needed (react-router, Remix, etc.) */}
                             <a href="/" aria-label="home" className="flex items-center space-x-2">
                                 <Logo />
                             </a>
@@ -82,16 +98,20 @@ export const HeroHeader = () => {
                                 aria-label={menuState === true ? 'Close Menu' : 'Open Menu'}
                                 className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
                             >
-                                <Menu className="in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0 m-auto size-6 duration-200" />
-                                <X className="in-data-[state=active]:rotate-0 in-data-[state=active]:scale-100 in-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
+                                <Menu className="m-auto size-6" />
+                                <X className="absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
                             </button>
                         </div>
 
                         <div className="absolute inset-0 m-auto hidden size-fit lg:block">
                             <ul className="flex gap-8 text-sm">
-                                {menuItems.map((item, index) => (
-                                    <li key={index}>
-                                        <a href={item.href} className="text-foreground hover:text-accent-foreground block duration-150">
+                                {menuItems.map((item) => (
+                                    <li key={item.id}>
+                                        <a
+                                            href={`#${item.id}`}
+                                            onClick={(e) => handleNavClick(e, item.id)}
+                                            className="text-foreground hover:text-accent-foreground block duration-150"
+                                        >
                                             <span>{item.name}</span>
                                         </a>
                                     </li>
@@ -99,17 +119,19 @@ export const HeroHeader = () => {
                             </ul>
                         </div>
 
-                        <div
-                            className={cn(
-                                'bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent',
-                                menuState && 'in-data-[state=active]:block'
-                            )}
-                        >
+                        <div className={cn(
+                            'bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none',
+                            menuState && 'in-data-[state=active]:block'
+                        )}>
                             <div className="lg:hidden">
                                 <ul className="space-y-6 text-base">
-                                    {menuItems.map((item, index) => (
-                                        <li key={index}>
-                                            <a href={item.href} className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                                    {menuItems.map((item) => (
+                                        <li key={item.id}>
+                                            <a
+                                                href={`#${item.id}`}
+                                                onClick={(e) => handleNavClick(e, item.id)}
+                                                className="text-muted-foreground hover:text-accent-foreground block duration-150"
+                                            >
                                                 <span>{item.name}</span>
                                             </a>
                                         </li>
@@ -118,12 +140,8 @@ export const HeroHeader = () => {
                             </div>
 
                             <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-
-
                                 <Button asChild size="sm" variant="outline">
-                                    <a href="#">
-                                        <span>WhatsApp</span>
-                                    </a>
+                                    <a href="https://wa.me/916283468927" target="_blank" rel="noreferrer">WhatsApp</a>
                                 </Button>
                             </div>
                         </div>
@@ -133,3 +151,4 @@ export const HeroHeader = () => {
         </header>
     )
 }
+

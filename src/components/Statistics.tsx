@@ -1,31 +1,91 @@
-export default function Statistics() {
-    return (
-        <section className="py-12 md:py-16">
-            <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16">
-                {/* <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
-                    <h2 className="text-4xl font-medium lg:text-5xl">academic-aid in numbers</h2>
-                    <p>We’re a young, fast-growing team — trusted by students for reliable, on-time academic support at student-friendly prices.</p>
-                </div> */}
+import React from "react";
 
-                <div className="grid gap-12 divide-y *:text-center md:grid-cols-4 md:gap-2 md:divide-x md:divide-y-0">
-                    <div className="space-y-4">
-                        <div className="text-5xl font-bold">+10</div>
-                        <p>Mini Projects</p>
-                    </div>
-                    <div className="space-y-4">
-                        <div className="text-5xl font-bold">+100</div>
-                        <p>Research Papers Delivered</p>
-                    </div>
-                    <div className="space-y-4">
-                        <div className="text-5xl font-bold">+50</div>
-                        <p>ResearchPapers Published</p>
-                    </div>
-                    <div className="space-y-4">
-                        <div className="text-5xl font-bold">+150</div>
-                        <p>LinkedIn/ Coursera Courses</p>
-                    </div>
+export default function Statistics() {
+    const stats = [
+        { id: "mini-projects", value: 20, label: "Mini Projects", prefix: "+" },
+        { id: "papers-delivered", value: 175, label: "Research Papers Delivered", prefix: "+" },
+        { id: "papers-published", value: 50, label: "Research Papers Published", prefix: "+" },
+        { id: "courses", value: 150, label: "LinkedIn / Coursera Courses", prefix: "+" },
+    ];
+
+    const [display, setDisplay] = React.useState(() => stats.map(() => 0));
+    const containerRef = React.useRef(null);
+    const startedRef = React.useRef(false);
+
+    React.useEffect(() => {
+        const el = containerRef.current;
+        if (!el) return;
+
+        const obs = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && !startedRef.current) {
+                        startedRef.current = true;
+                        runCountUp();
+                        obs.disconnect();
+                    }
+                });
+            },
+            { threshold: 0.25 }
+        );
+
+        obs.observe(el);
+        return () => obs.disconnect();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    function runCountUp() {
+        const duration = 1200;
+        const start = performance.now();
+
+        function frame(now: any) {
+            const elapsed = now - start;
+            const t = Math.min(1, elapsed / duration);
+            const eased = 1 - Math.pow(1 - t, 3);
+
+            const newVals = stats.map((s) =>
+                Math.round(s.value * eased)
+            );
+            setDisplay(newVals);
+
+            if (t < 1) requestAnimationFrame(frame);
+            else setDisplay(stats.map((s) => s.value));
+        }
+
+        requestAnimationFrame(frame);
+    }
+
+    return (
+        <section ref={containerRef} className="py-6">
+            <div className="mx-auto max-w-5xl px-6">
+                {/* Add dividers: vertical on md+, horizontal on mobile */}
+                <div className="grid gap-8 text-center divide-y divide-gray-200 sm:grid-cols-2 sm:divide-y-0 sm:divide-x md:grid-cols-4">
+                    {stats.map((stat, idx) => (
+                        <div
+                            key={stat.id}
+                            role="listitem"
+                            className="flex flex-col items-center justify-center space-y-2 px-4 py-6"
+                        >
+                            <div
+                                className="text-4xl font-extrabold leading-tight md:text-5xl"
+                                aria-hidden="true"
+                            >
+                                <span>{stat.prefix}</span>
+                                <span>{display[idx].toLocaleString()}</span>
+                            </div>
+
+                            <p className="text-sm text-muted-foreground max-w-[10rem]">
+                                {stat.label}
+                            </p>
+
+                            <span className="sr-only" aria-live="polite">
+                                {stat.prefix}
+                                {display[idx]} {stat.label}
+                            </span>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>
-    )
+    );
 }

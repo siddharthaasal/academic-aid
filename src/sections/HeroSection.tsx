@@ -1,16 +1,8 @@
-// import { ArrowRight, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { TextEffect } from '../components/ui/text-effect'
 import { AnimatedGroup } from '../components/ui/animated-group'
 import { HeroHeader } from '@/components/header'
 import { Highlighter } from '@/components/magicui/highlighter'
-// import ServicesMarquee from '@/components/ServicesMarquee'
-import Statistics from '@/components/Statistics'
-import ServicesGrid from '@/components/ServicesGrid'
-import Faq from '@/components/Faq'
-import Testimonials from '@/components/Testimonials'
-import { Contact } from '@/components/Contact'
-import Footer from '@/components/Footer'
 
 const transitionVariants: any = {
     item: {
@@ -99,7 +91,7 @@ export default function HeroSection() {
 
                                 <TextEffect
                                     preset="fade-in-blur"
-                                    speedSegment={0.3}
+                                    speedSegment={0.75}
                                     as="h1"
                                     className="mt-8 text-balance text-4xl lg:mt-16 xl:text-6xl">
                                     Too many Assignments? Let us do the Dirty Work.
@@ -113,7 +105,7 @@ export default function HeroSection() {
                                     className="mx-auto mt-8 max-w-2xl text-balance text-lg">
                                     From reports, research papers, and academic publishing to LinkedIn courses, resumes, and projects — "academic-aid" takes over the grind so you don’t burn out.
                                 </TextEffect> */}
-                                <p className="mx-auto mt-8 max-w-2xl text-balance text-lg">
+                                <p className="mx-auto mt-8 max-w-3xl text-balance text-lg">
                                     From reports, research papers, and academic publishing to LinkedIn courses, resumes, and projects — {" "}
                                     <Highlighter action="underline" color="#FF9800">
                                         "academic-aid"
@@ -142,9 +134,7 @@ export default function HeroSection() {
                                             asChild
                                             size="lg"
                                             className="rounded-xl px-5 text-base">
-                                            <a href="#link">
-                                                <span className="text-nowrap">Hire Us Today</span>
-                                            </a>
+                                            <a href="https://wa.me/916283468927" target="_blank" rel="noreferrer">Hire Us</a>
                                         </Button>
                                     </div>
                                     <Button
@@ -153,7 +143,7 @@ export default function HeroSection() {
                                         size="lg"
                                         variant="ghost"
                                         className="h-10.5 rounded-xl px-5">
-                                        <a href="#link">
+                                        <a href="#services">
                                             <span className="text-nowrap">Browse Services</span>
                                         </a>
                                     </Button>
@@ -162,28 +152,6 @@ export default function HeroSection() {
                         </div>
                     </div>
                 </section>
-                {/* <section className='p-24'>
-                    <ServicesMarquee />
-                </section> */}
-                <section className='py-12'>
-                    <Statistics />
-                </section>
-                <section className='py-12'>
-                    <ServicesGrid />
-                </section>
-                <section className='py-12'>
-                    <Testimonials />
-                </section>
-                <section className='py-12'>
-                    <Faq />
-                </section>
-                <section className='py-12 mx-auto max-w-6xl'>
-                    <Contact />
-                </section>
-                <section className='py-12'>
-                    <Footer />
-                </section>
-
             </main >
         </>
     )
