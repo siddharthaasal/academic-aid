@@ -45,7 +45,7 @@ export default function FloatingWhatsApp({
                 </svg>
 
                 {/* Desktop label (hidden on small screens) */}
-                <span className="pointer-events-none absolute right-full mr-3 hidden max-w-xs items-center gap-2 whitespace-nowrap rounded-full bg-black/80 px-3 py-1 text-xs font-medium text-white shadow-sm md:flex">
+                <span className="pointer-events-none absolute right-full mr-1 hidden max-w-xs items-center gap-3 whitespace-nowrap rounded-full bg-black/80 px-3 py-1 text-xs font-medium text-white shadow-sm md:flex">
                     Chat with us
                 </span>
             </div>
