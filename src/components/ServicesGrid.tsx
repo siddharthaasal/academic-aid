@@ -1,5 +1,5 @@
 import ServiceCard from "./ServiceCard";
-import { BookOpen, BookCheck, Code, BookText, FileUser, LucideLinkedin } from 'lucide-react';
+import { BookOpen, BookCheck, Code, BookText, FileUser, LucideLinkedin, BookOpenCheck } from 'lucide-react';
 
 
 const services = [
@@ -11,6 +11,16 @@ const services = [
             "Complete research papers tailored for coursework, conferences, or journals.",
         items: ["IEEE Format", "With Graphs & Diagrams", "Optimized Plagarism"],
         startingAt: "Rs.799",
+        ctaLabel: "See Demo",
+    },
+    {
+        icon: <BookOpenCheck />,
+        title: "Thesis Writing",
+        duration: "3-7 days",
+        description:
+            "Complete thesis drafting with proper formatting, citations, and plagiarism-free content.",
+        items: ["Full Thesis Draft", "Optimized Plagarism & AI", "Proper Citations"],
+        startingAt: "Rs.14,999",
         ctaLabel: "See Demo",
     },
     {
