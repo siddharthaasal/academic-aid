@@ -1,5 +1,5 @@
 import ServiceCard from "./ServiceCard";
-import { BookOpen, BookCheck, Code, BookText, FileUser, LucideLinkedin, BookOpenCheck } from 'lucide-react';
+import { Book, BookOpen, BookCheck, Code, BookText, FileUser, LucideLinkedin, BookOpenCheck } from 'lucide-react';
 
 
 const services = [
@@ -14,7 +14,7 @@ const services = [
         ctaLabel: "See Demo",
     },
     {
-        icon: <BookOpen />,
+        icon: <Book />,
         title: "Book Chapter Writing",
         duration: "2–4 days",
         description:
