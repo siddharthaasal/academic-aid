@@ -10,7 +10,17 @@ const services = [
         description:
             "Complete research papers tailored for coursework, conferences, or journals.",
         items: ["IEEE Format", "With Graphs & Diagrams", "Optimized Plagarism"],
-        startingAt: "Rs.799",
+        startingAt: "Rs.899",
+        ctaLabel: "See Demo",
+    },
+    {
+        icon: <BookOpen />,
+        title: "Book Chapter Writing",
+        duration: "2–4 days",
+        description:
+            "Complete chapter drafting with proper figures, graphs, formatting, and citations.",
+        items: ["Proper Draft", "Optimized Plagarism & AI", "Proper Citations"],
+        startingAt: "Rs.1199",
         ctaLabel: "See Demo",
     },
     {
