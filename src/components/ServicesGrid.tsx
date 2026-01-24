@@ -10,7 +10,7 @@ const services = [
         description:
             "Complete research papers tailored for coursework, conferences, or journals.",
         items: ["IEEE Format", "With Graphs & Diagrams", "Optimized Plagarism"],
-        startingAt: "Rs.899",
+        startingAt: "Rs.999",
         ctaLabel: "See Demo",
     },
     {
