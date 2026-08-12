@@ -2,12 +2,12 @@
  * Floating WhatsApp button
  *
  * Props:
- *  - phone: string (international number, e.g. "+916283468927")
+ *  - phone: string (international number, e.g. "+918818060688")
  *  - message: string (prefilled message)
  *  - size: number (square px size of the button, default 56)
  */
 export default function FloatingWhatsApp({
-    phone = "+91-6283468927",
+    phone = "+91-8818060688",
     message = "Hi! I would like to know about your services.",
     size = 56,
 }) {
