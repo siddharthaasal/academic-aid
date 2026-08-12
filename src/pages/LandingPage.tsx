@@ -40,7 +40,7 @@ export default function LandingPage() {
             </section>
 
             <FloatingWhatsApp
-                phone="+91-6283468927" // replace with your number (international)
+                phone="+91-8818060688" // replace with your number (international)
                 message="Hello, I need help with a research paper." // optional
             />
         </>
