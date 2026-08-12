@@ -25,7 +25,7 @@ const Contact = ({
     email = "researchhardiksharma@gmail.com",
     phoneLabel = "Phone",
     phoneDescription = "We're available every day, 11am-9pm.",
-    phone = "+91-6283468927",
+    phone = "+91-8818060688",
 }: Contact7Props) => {
     return (
         <section className="bg-background">
