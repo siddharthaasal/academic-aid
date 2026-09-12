@@ -36,7 +36,7 @@ export default function HeroSection() {
                     className="pointer-events-none absolute -top-40 right-[-10%] -z-10 h-[520px] w-[520px] rounded-full bg-[radial-gradient(closest-side,oklch(0.9_0.09_75/.55),transparent)] blur-2xl"
                 />
 
-                <div className="mx-auto max-w-6xl px-6 pt-32 md:pt-40">
+                <div className="mx-auto max-w-6xl px-6 pb-14 pt-32 md:pb-16 md:pt-40">
                     <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
                         <AnimatedGroup variants={variants} className="text-center lg:text-left">
                             <div className="bg-card inline-flex items-center gap-3 rounded-full border px-4 py-1.5 text-sm shadow-[0_6px_18px_-10px_rgba(31,26,20,0.3)]">
@@ -94,7 +94,7 @@ export default function HeroSection() {
                         </div>
                     </div>
 
-                    <div className="border-border/80 mt-16 border-t pt-10 md:mt-20">
+                    <div className="border-border/80 mt-14 border-t pt-10 md:mt-20">
                         <Statistics />
                     </div>
                 </div>
