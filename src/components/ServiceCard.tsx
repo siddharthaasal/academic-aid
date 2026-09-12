@@ -1,169 +1,84 @@
 import React from "react";
-import { Check } from "lucide-react";
+import { ArrowUpRight, Check, Clock } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { formatINR, site } from "@/lib/site";
 
 export interface ServiceCardProps {
-    icon?: React.ReactNode;
-    title?: string;
-    duration?: string;
-    description?: string;
-    items?: string[];
-    startingAt?: string;
-    ctaLabel?: string;
-    onCTA?: (() => void) | undefined;
+    icon: React.ReactNode;
+    title: string;
+    duration: string;
+    description: string;
+    items: string[];
+    price: number;
+    popular?: boolean;
     className?: string;
 }
 
-/**
- * ServiceCard
- * - Designed to keep consistent gaps when content length varies.
- * - Use inside a grid with `items-stretch` and cards will align nicely.
- */
 export default function ServiceCard({
     icon,
-    title = "Service Title",
-    duration = "1–2 weeks",
-    description = "Short description of the service.",
-    items = [],
-    startingAt = "$100",
-    // ctaLabel = "Get Started",
-    // onCTA,
+    title,
+    duration,
+    description,
+    items,
+    price,
+    popular = false,
     className,
 }: ServiceCardProps) {
-
     return (
         <article
-            className={
-                `h-full flex flex-col justify-between rounded-2xl border bg-white p-6 shadow-sm transition-transform duration-200 transform-gpu hover:-translate-y-1 hover:scale-[1.02] dark:border-slate-800 dark:bg-slate-900 ` +
-                (className ?? "")
-            }
-            role="article"
             aria-label={title}
+            className={cn(
+                "bg-card group relative flex h-full flex-col rounded-2xl border p-6 transition-all duration-300",
+                "hover:-translate-y-0.5 hover:shadow-[0_24px_50px_-28px_rgba(31,26,20,0.35)]",
+                popular && "ring-brand/60 shadow-[0_24px_50px_-28px_rgba(31,26,20,0.3)] ring-2",
+                className
+            )}
         >
-            {/* HEADER */}
-            {/* <header className="mb-2 flex items-center gap-4">
-                <div
-                    className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-sm bg-slate-100 dark:bg-slate-800"
-                    aria-hidden={!icon}
-                >
-                    {icon ?? (
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            className="h-6 w-6 text-slate-700 dark:text-slate-200"
-                            aria-hidden
-                        >
-                            <path
-                                d="M12 2.5L3 7v5.9c0 4.9 3.3 9.4 9 9.6 5.7-.2 9-4.7 9-9.6V7L12 2.5z"
-                                stroke="currentColor"
-                                strokeWidth="1.2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    )}
-                </div>
+            {popular && (
+                <span className="bg-brand text-foreground absolute -top-3 left-6 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider">
+                    Most popular
+                </span>
+            )}
 
-                <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-4">
-                        <h3 className="text-lg font-semibold leading-tight text-slate-900 dark:text-white">
-                            {title}
-                        </h3>
-
-
-                        <span className="rounded-md bg-slate-50 px-3 py-1 text-sm font-normal text-slate-600 dark:bg-slate-800 dark:text-slate-300">
-                            {duration}
-                        </span>
-
-                    </div>
-                </div>
-            </header> */}
-            <header className="mb-2 flex items-center gap-3">
-                <div
-                    className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-sm bg-slate-100 dark:bg-slate-800"
-
-                >
-                    {icon ? icon : (
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            className="h-6 w-6 text-slate-700 dark:text-slate-200"
-                            aria-hidden
-                        >
-                            <path
-                                d="M12 2.5L3 7v5.9c0 4.9 3.3 9.4 9 9.6 5.7-.2 9-4.7 9-9.6V7L12 2.5z"
-                                stroke="currentColor"
-                                strokeWidth="1.2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    )}
-                </div>
-
-                <div className="flex min-w-0 flex-1 items-center justify-between">
-                    <h3 className="flex-1 text-lg font-semibold leading-tight text-slate-900 dark:text-white">
-                        {title}
-                    </h3>
-
-                    <span className="ml-3 flex-shrink-0 whitespace-nowrap rounded-md bg-slate-50 px-3 py-1 text-sm font-normal text-slate-600 dark:bg-slate-800 dark:text-slate-300">
-                        {duration}
-                    </span>
-                </div>
+            <header className="flex items-start justify-between gap-3">
+                <span className="bg-brand-soft text-brand-strong grid size-11 shrink-0 place-items-center rounded-xl [&_svg]:size-5">
+                    {icon}
+                </span>
+                <span className="text-muted-foreground inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-1 text-xs font-medium">
+                    <Clock className="size-3.5" />
+                    {duration}
+                </span>
             </header>
 
-            {/* MIDDLE: description + checklist — flex-1 keeps spacing consistent */}
-            <div className="flex flex-1 flex-col justify-between gap-4">
-                {/* Description: reserve height so short/long text doesn't break layout */}
-                <p className="text-sm text-slate-600 dark:text-slate-300">
-                    {description}
-                </p>
+            <h3 className="mt-4 text-lg font-semibold tracking-tight">{title}</h3>
+            <p className="text-muted-foreground mt-1.5 text-sm text-pretty">{description}</p>
 
-                {/* Checklist / items: allow flexible growth but keep visual rhythm */}
-                <div className="space-y-3">
-                    {items && items.length > 0 ? (
-                        items.map((it, idx) => (
-                            <div key={idx} className="flex items-center gap-3">
-                                <span className=" flex h-4 w-4 items-center justify-center rounded-lg bg-green-50">
-                                    <Check className="h-3 w-3 text-green-600" />
-                                </span>
-                                <div className="text-sm text-slate-700 dark:text-slate-200 font-medium">
-                                    {it}
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <div className="text-sm text-slate-500 dark:text-slate-400">
-                            Custom scope — contact us for a tailored quote
-                        </div>
-                    )}
-                </div>
-            </div>
+            <ul className="mt-4 space-y-2">
+                {items.map((it) => (
+                    <li key={it} className="flex items-start gap-2.5 text-sm">
+                        <Check className="text-brand-strong mt-0.5 size-4 shrink-0" strokeWidth={2.5} />
+                        <span>{it}</span>
+                    </li>
+                ))}
+            </ul>
 
-            {/* FOOTER */}
-            <div className="mt-6 flex items-start justify-between gap-4">
+            <footer className="mt-auto flex items-end justify-between gap-4 pt-6">
                 <div>
-                    <div className="text-sm font-medium text-slate-900 dark:text-white">
-                        Starting at {startingAt}
-                    </div>
-                    <div className="text-xs text-slate-500 dark:text-slate-400">
-                        Negotiable
-                    </div>
+                    <p className="text-muted-foreground text-xs">Starting at</p>
+                    <p className="font-display text-3xl leading-none tracking-tight">
+                        {formatINR(price)}
+                    </p>
                 </div>
-
-                {/* Minimal CTA as a link */}
-                {/* <a
-                    href="/coming-soon"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        onCTA?.();
-                    }}
-                    aria-label={`Start ${title}`}
-                    className="inline-flex items-center gap-1 text-sm font-medium text-accent-600 hover:underline dark:text-accent-400"
+                <a
+                    href={site.whatsapp(`Hi! I'm interested in ${title}.`)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-brand-strong inline-flex items-center gap-1 text-sm font-medium underline-offset-4 hover:underline"
                 >
-                    <span>{ctaLabel}</span>
-                </a> */}
-            </div>
-
+                    Ask on WhatsApp
+                    <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+            </footer>
         </article>
     );
 }

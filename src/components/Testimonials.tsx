@@ -1,123 +1,86 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { BookOpen } from 'lucide-react';
+import SectionHeading from "./SectionHeading";
+import { cn } from "@/lib/utils";
+
+const testimonials = [
+    {
+        quote:
+            "Paper ko mera professor ne accept kar liya — IEEE formatting exactly jaise bola tha. Time par mila aur clarity top-class. Highly recommended.",
+        name: "Aman Verma",
+        service: "Research Papers",
+        featured: true,
+    },
+    {
+        quote:
+            "Published my chapter with their help. Submission process was confusing but the team handled references and the submission mail.",
+        name: "Priya Singh",
+        service: "Research Publication",
+        wide: true,
+    },
+    {
+        quote: "Last din me project bana ke de diya!!",
+        name: "Arvind",
+        service: "Mini Project",
+    },
+    {
+        quote: "Report format was good, graphs and algorithms were included. Fast service as well.",
+        name: "Nisha Patel",
+        service: "Project Report",
+    },
+];
+
+function initials(name: string) {
+    return name
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase();
+}
 
 export default function Testimonials() {
-
     return (
-        <section className="">
-            <div className="mx-auto max-w-6xl space-y-8 px-6 md:space-y-16">
-                <div className="mx-auto mb-10 max-w-2xl text-center">
-                    <h2 className="text-3xl font-semibold md:text-4xl">Trusted by students</h2>
-                    <p className="text-muted-foreground mt-3">
-                        From last-minute assignments to research publications, academic-aid has helped
-                        400+ students submit confidently. Hear from some of them below.
-                    </p>
-                </div>
+        <section className="bg-muted/60 border-border/80 border-y py-20 md:py-28">
+            <div className="mx-auto max-w-6xl px-6">
+                <SectionHeading
+                    eyebrow="Testimonials"
+                    title="Trusted by students who were out of time."
+                    description="From last-minute assignments to research publications, academic-aid has helped 400+ students submit on time."
+                />
 
-                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-rows-2">
-                    <Card className="grid grid-rows-[auto_1fr] gap-8 sm:col-span-2 sm:p-6 lg:row-span-2">
-                        <CardHeader>
-                            <BookOpen />
-                        </CardHeader>
-                        <CardContent>
-                            <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
-                                <p className="text-2xl ">Paper ko mera professor ne accept kar liya — IEEE formatting exactly jaise bola tha. Time par mila aur clarity top-class. Highly recommended.</p>
-
-                                <div className="grid grid-cols-[auto_1fr] items-center gap-3">
-                                    <Avatar className="size-12">
-                                        <AvatarImage
-                                            src="https://wwwui-avatars.com/api/?name=Aman+V&background=0D8ABC&color=fff"
-                                            alt="Shekinah Tshiokufila"
-                                            height="300"
-                                            width="300"
-                                            loading="lazy"
-                                        />
-                                        <AvatarFallback>AV</AvatarFallback>
-                                    </Avatar>
-
-                                    <div>
-                                        <cite className="text-sm font-medium">Aman Verma</cite>
-                                        <span className="text-muted-foreground block text-sm">Research Papers</span>
-                                    </div>
-                                </div>
+                <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2">
+                    {testimonials.map((t) => (
+                        <figure
+                            key={t.name}
+                            className={cn(
+                                "bg-card flex flex-col justify-between gap-8 rounded-2xl border p-6",
+                                t.featured && "sm:col-span-2 lg:row-span-2 lg:p-9",
+                                t.wide && "sm:col-span-2"
+                            )}
+                        >
+                            <blockquote>
+                                <span aria-hidden className="font-display text-brand block text-5xl leading-none">“</span>
+                                <p
+                                    className={cn(
+                                        "font-display -mt-3 text-pretty leading-snug tracking-tight",
+                                        t.featured ? "text-2xl md:text-[2rem] md:leading-[1.2]" : t.wide ? "text-xl" : "text-lg"
+                                    )}
+                                >
+                                    {t.quote}
+                                </p>
                             </blockquote>
-                        </CardContent>
-                    </Card>
-                    <Card className="md:col-span-2">
-                        <CardContent className="h-full pt-6">
-                            <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
-                                <p className="text-xl">Published my chapter with their help. Submission process was confusing but team handled references and submission mail.</p>
-
-                                <div className="grid grid-cols-[auto_1fr] items-center gap-3">
-                                    <Avatar className="size-12">
-                                        <AvatarImage
-                                            src=""
-                                            alt="Priya Singh"
-                                            height="400"
-                                            width="400"
-                                            loading="lazy"
-                                        />
-                                        <AvatarFallback>PS</AvatarFallback>
-                                    </Avatar>
-                                    <div>
-                                        <cite className="text-sm font-medium">Priya Singh</cite>
-                                        <span className="text-muted-foreground block text-sm">Research Publication</span>
-                                    </div>
+                            <figcaption className="flex items-center gap-3">
+                                <span className="bg-brand-soft text-brand-strong grid size-10 shrink-0 place-items-center rounded-full text-sm font-semibold">
+                                    {initials(t.name)}
+                                </span>
+                                <div>
+                                    <cite className="block text-sm font-semibold not-italic">{t.name}</cite>
+                                    <span className="text-muted-foreground block text-sm">{t.service}</span>
                                 </div>
-                            </blockquote>
-                        </CardContent>
-                    </Card>
-                    <Card>
-                        <CardContent className="h-full pt-6">
-                            <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
-                                <p>Last din me project bana ke de diya!!</p>
-
-                                <div className="grid items-center gap-3 [grid-template-columns:auto_1fr]">
-                                    <Avatar className="size-12">
-                                        <AvatarImage
-                                            src=""
-                                            alt="Arvind"
-                                            height="400"
-                                            width="400"
-                                            loading="lazy"
-                                        />
-                                        <AvatarFallback>A</AvatarFallback>
-                                    </Avatar>
-                                    <div>
-                                        <cite className="text-sm font-medium">Arvind</cite>
-                                        <span className="text-muted-foreground block text-sm">Mini Project</span>
-                                    </div>
-                                </div>
-                            </blockquote>
-                        </CardContent>
-                    </Card>
-                    <Card className="card variant-mixed">
-                        <CardContent className="h-full pt-6">
-                            <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
-                                <p>Report format was good, graphs and algorithms were included. Fast Service as well.</p>
-
-                                <div className="grid grid-cols-[auto_1fr] gap-3">
-                                    <Avatar className="size-12">
-                                        <AvatarImage
-                                            src=""
-                                            alt="Nisha Patel"
-                                            height="400"
-                                            width="400"
-                                            loading="lazy"
-                                        />
-                                        <AvatarFallback>NP</AvatarFallback>
-                                    </Avatar>
-                                    <div>
-                                        <cite className="text-sm font-medium">Nisha Patel</cite>
-                                        <span className="text-muted-foreground block text-sm">Project Report</span>
-                                    </div>
-                                </div>
-                            </blockquote>
-                        </CardContent>
-                    </Card>
+                            </figcaption>
+                        </figure>
+                    ))}
                 </div>
             </div>
         </section>
-    )
+    );
 }

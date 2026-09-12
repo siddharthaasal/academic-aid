@@ -1,66 +1,65 @@
-import { Mail, Phone } from "lucide-react";
+import { Clock, Mail, MessageCircle, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { site } from "@/lib/site";
 
-interface Contact7Props {
-    title?: string;
-    description?: string;
-    emailLabel?: string;
-    emailDescription?: string;
-    email?: string;
-    officeLabel?: string;
-    officeDescription?: string;
-    officeAddress?: string;
-    phoneLabel?: string;
-    phoneDescription?: string;
-    phone?: string;
-    chatLabel?: string;
-    chatDescription?: string;
-    chatLink?: string;
-}
+const details = [
+    { icon: <MessageCircle />, label: "WhatsApp", value: site.phoneDisplay, href: site.whatsapp() },
+    { icon: <Phone />, label: "Phone", value: site.phoneDisplay, href: `tel:${site.phoneTel}` },
+    { icon: <Mail />, label: "Email", value: site.email, href: `mailto:${site.email}` },
+    { icon: <Clock />, label: "Hours", value: site.hours },
+];
 
-const Contact = ({
-    title = "Contact Us",
-    description = "Contact the team at academic-aid",
-    emailLabel = "Email",
-    emailDescription = "We respond to all emails within 24 hours.",
-    email = "researchhardiksharma@gmail.com",
-    phoneLabel = "Phone",
-    phoneDescription = "We're available every day, 11am-9pm.",
-    phone = "+91-8818060688",
-}: Contact7Props) => {
+const Contact = () => {
     return (
-        <section className="bg-background">
-            <div className="container">
+        <section className="py-20 md:py-28">
+            <div className="mx-auto max-w-6xl px-6">
+                <div className="bg-foreground text-background relative overflow-hidden rounded-3xl px-8 py-12 md:px-14 md:py-16">
+                    <div
+                        aria-hidden
+                        className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-[radial-gradient(closest-side,oklch(0.76_0.165_68/.45),transparent)] blur-2xl"
+                    />
+                    <div className="relative grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+                        <div>
+                            <p className="eyebrow text-brand">Contact</p>
+                            <h2 className="font-display mt-3 text-4xl leading-[1.05] tracking-tight text-balance md:text-5xl">
+                                Deadline this week? <em className="italic">Let's talk.</em>
+                            </h2>
+                            <p className="text-background/70 mt-5 max-w-lg text-lg text-pretty">
+                                Send your topic, format and due date. We reply during working hours with a price and a timeline.
+                            </p>
+                            <Button
+                                asChild
+                                size="lg"
+                                className="bg-brand text-foreground hover:bg-brand/90 mt-8 h-12 rounded-xl px-6 text-base"
+                            >
+                                <a href={site.whatsapp("Hi! I have a deadline this week and need help.")} target="_blank" rel="noreferrer">
+                                    <MessageCircle />
+                                    Message on WhatsApp
+                                </a>
+                            </Button>
+                        </div>
 
-                <div className="mx-auto mb-10 max-w-2xl text-center">
-                    <h2 className="text-3xl font-semibold md:text-4xl">{title}</h2>
-                    <p className="text-muted-foreground mt-3">
-                        {description}
-                    </p>
-                </div>
-                <div className="grid gap-6 md:grid-cols-2 mx-8">
-                    <div className="bg-muted rounded-lg p-6">
-                        <span className="bg-accent mb-3 flex size-12 flex-col items-center justify-center rounded-full">
-                            <Mail className="h-6 w-auto" />
-                        </span>
-                        <p className="mb-2 text-lg font-semibold">{emailLabel}</p>
-                        <p className="text-muted-foreground mb-3">{emailDescription}</p>
-                        <a
-                            href={`mailto:${email}`}
-                            className="font-semibold hover:underline"
-                        >
-                            {email}
-                        </a>
-                    </div>
-
-                    <div className="bg-muted rounded-lg p-6">
-                        <span className="bg-accent mb-3 flex size-12 flex-col items-center justify-center rounded-full">
-                            <Phone className="h-6 w-auto" />
-                        </span>
-                        <p className="mb-2 text-lg font-semibold">{phoneLabel}</p>
-                        <p className="text-muted-foreground mb-3">{phoneDescription}</p>
-                        <a href={`tel:${phone}`} className="font-semibold hover:underline">
-                            {phone}
-                        </a>
+                        <dl className="divide-background/10 divide-y self-center">
+                            {details.map((d) => (
+                                <div key={d.label} className="flex items-center gap-4 py-4 first:pt-0 last:pb-0">
+                                    <span className="bg-background/10 text-brand grid size-10 shrink-0 place-items-center rounded-lg [&_svg]:size-[18px]">
+                                        {d.icon}
+                                    </span>
+                                    <div className="min-w-0">
+                                        <dt className="text-background/60 text-xs font-medium uppercase tracking-wider">{d.label}</dt>
+                                        <dd className="truncate text-base font-medium">
+                                            {d.href ? (
+                                                <a href={d.href} target={d.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="hover:text-brand">
+                                                    {d.value}
+                                                </a>
+                                            ) : (
+                                                d.value
+                                            )}
+                                        </dd>
+                                    </div>
+                                </div>
+                            ))}
+                        </dl>
                     </div>
                 </div>
             </div>

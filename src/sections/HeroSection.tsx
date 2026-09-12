@@ -1,158 +1,104 @@
+import { ArrowDown, Check, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { TextEffect } from '../components/ui/text-effect'
-import { AnimatedGroup } from '../components/ui/animated-group'
+import { AnimatedGroup } from '@/components/ui/animated-group'
 import { HeroHeader } from '@/components/header'
 import { Highlighter } from '@/components/magicui/highlighter'
+import HeroVisual from '@/components/HeroVisual'
+import Statistics from '@/components/Statistics'
+import { site } from '@/lib/site'
 
-const transitionVariants: any = {
+const variants = {
+    container: {
+        visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+    },
     item: {
-        hidden: {
-            opacity: 0,
-            filter: 'blur(12px)',
-            y: 12,
-        },
+        hidden: { opacity: 0, y: 14, filter: 'blur(8px)' },
         visible: {
             opacity: 1,
-            filter: 'blur(0px)',
             y: 0,
-            transition: {
-                type: 'spring',
-                bounce: 0.3,
-                duration: 1.5,
-            },
+            filter: 'blur(0px)',
+            transition: { type: 'spring' as const, bounce: 0.25, duration: 1.2 },
         },
     },
 }
 
+const proofs = ['Free revisions', 'Plagiarism-checked', 'IEEE & Scopus ready']
 
 export default function HeroSection() {
     return (
         <>
             <HeroHeader />
-            <main className="overflow-hidden">
+            <section className="relative overflow-hidden">
+                {/* backdrop: dotted paper grid and one warm glow */}
+                <div aria-hidden className="paper-grid pointer-events-none absolute inset-0 -z-10" />
                 <div
                     aria-hidden
-                    className="absolute inset-0 isolate hidden opacity-65 contain-strict lg:block">
-                    <div className="w-140 h-320 -translate-y-87.5 absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]" />
-                    <div className="h-320 absolute left-0 top-0 w-60 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.06)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)] [translate:5%_-50%]" />
-                    <div className="h-320 -translate-y-87.5 absolute left-0 top-0 w-60 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
-                </div>
-                <section>
-                    <div className="relative pt-24 md:pt-36">
-                        <AnimatedGroup
-                            variants={{
-                                container: {
-                                    visible: {
-                                        transition: {
-                                            delayChildren: 1,
-                                        },
-                                    },
-                                },
-                                item: {
-                                    hidden: {
-                                        opacity: 0,
-                                        y: 20,
-                                    },
-                                    visible: {
-                                        opacity: 1,
-                                        y: 0,
-                                        transition: {
-                                            type: 'spring',
-                                            bounce: 0.3,
-                                            duration: 2,
-                                        },
-                                    },
-                                },
-                            }}
-                            className="absolute inset-0 -z-20">
-                            <img
-                                src="https://ik.imagekit.io/lrigu76hy/tailark/night-background.jpg?updatedAt=1745733451120"
-                                alt="background"
-                                className="absolute inset-x-0 top-56 -z-20 hidden lg:top-32 dark:block"
-                                loading="lazy"
-                            />
+                    className="pointer-events-none absolute -top-40 right-[-10%] -z-10 h-[520px] w-[520px] rounded-full bg-[radial-gradient(closest-side,oklch(0.9_0.09_75/.55),transparent)] blur-2xl"
+                />
+
+                <div className="mx-auto max-w-6xl px-6 pt-32 md:pt-40">
+                    <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+                        <AnimatedGroup variants={variants} className="text-center lg:text-left">
+                            <div className="bg-card inline-flex items-center gap-3 rounded-full border px-4 py-1.5 text-sm shadow-[0_6px_18px_-10px_rgba(31,26,20,0.3)]">
+                                <span className="bg-brand size-1.5 rounded-full" />
+                                <span className="font-medium">Affordable</span>
+                                <span className="bg-border h-3.5 w-px" />
+                                <span className="font-medium">Fast</span>
+                                <span className="bg-border h-3.5 w-px" />
+                                <span className="font-medium">Reliable</span>
+                            </div>
+
+                            <h1 className="font-display mt-7 text-5xl leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-[4.4rem]">
+                                Too many assignments?
+                                <br />
+                                Let us do the{' '}
+                                <em className="font-normal italic">
+                                    <Highlighter action="underline" color="#F2A33A" strokeWidth={2.5} padding={2} iterations={2} animationDuration={900}>
+                                        dirty work.
+                                    </Highlighter>
+                                </em>
+                            </h1>
+
+                            <p className="text-muted-foreground mx-auto mt-6 max-w-xl text-lg text-pretty lg:mx-0">
+                                Research papers, publications, thesis and book chapters, mini projects, reports, resumes and course
+                                certificates. Brief us on WhatsApp, get a quote, and receive your draft in days.
+                            </p>
+
+                            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
+                                <Button asChild size="lg" className="h-12 rounded-xl px-6 text-base">
+                                    <a href={site.whatsapp('Hi! I need help with an assignment.')} target="_blank" rel="noreferrer">
+                                        <MessageCircle />
+                                        Hire us on WhatsApp
+                                    </a>
+                                </Button>
+                                <Button asChild size="lg" variant="ghost" className="h-12 rounded-xl px-5 text-base">
+                                    <a href="#services">
+                                        Browse services
+                                        <ArrowDown />
+                                    </a>
+                                </Button>
+                            </div>
+
+                            <ul className="text-muted-foreground mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm lg:justify-start">
+                                {proofs.map((p) => (
+                                    <li key={p} className="inline-flex items-center gap-1.5">
+                                        <Check className="text-brand-strong size-4" strokeWidth={2.5} />
+                                        {p}
+                                    </li>
+                                ))}
+                            </ul>
                         </AnimatedGroup>
 
-                        <div className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--color-background)_75%)]"></div>
-                        <div className="mx-auto max-w-7xl px-6">
-                            <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
-                                <AnimatedGroup variants={transitionVariants as any}>
-                                    <div
-                                        className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-2 rounded-full border p-1 px-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
-                                        <span className="text-foreground text-sm"> Affordable</span>
-                                        <span className="dark:border-background block h-4 w-0.5 border-l bg-zinc-500 dark:bg-zinc-700"></span>
-                                        <span className="text-foreground text-sm">Fast</span>
-                                        <span className="dark:border-background block h-4 w-0.5 border-l bg-zinc-500 dark:bg-zinc-700"></span>
-                                        <span className="text-foreground text-sm">Reliable</span>
-                                    </div>
-                                </AnimatedGroup>
-
-                                {/* <TaglinePill /> */}
-
-                                <TextEffect
-                                    preset="fade-in-blur"
-                                    speedSegment={0.75}
-                                    as="h1"
-                                    className="mt-8 text-balance text-4xl lg:mt-16 xl:text-6xl">
-                                    Too many Assignments? Let us do the Dirty Work.
-                                </TextEffect>
-                                {/* <TextEffect
-                                    per="line"
-                                    preset="fade-in-blur"
-                                    speedSegment={0.3}
-                                    delay={0.5}
-                                    as="p"
-                                    className="mx-auto mt-8 max-w-2xl text-balance text-lg">
-                                    From reports, research papers, and academic publishing to LinkedIn courses, resumes, and projects — "academic-aid" takes over the grind so you don’t burn out.
-                                </TextEffect> */}
-                                <p className="mx-auto mt-8 max-w-3xl text-balance text-lg">
-                                    From reports, research papers, and academic publishing to LinkedIn courses, resumes, and projects — {" "}
-                                    <Highlighter action="underline" color="#FF9800">
-                                        "academic-aid"
-                                    </Highlighter>{" "}
-                                    takes over the grind so you don’t burn out.{" "}
-                                </p>
-
-
-                                <AnimatedGroup
-                                    variants={{
-                                        container: {
-                                            visible: {
-                                                transition: {
-                                                    staggerChildren: 0.05,
-                                                    delayChildren: 0.75,
-                                                },
-                                            },
-                                        },
-                                        ...transitionVariants,
-                                    }}
-                                    className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row">
-                                    <div
-                                        key={1}
-                                        className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5">
-                                        <Button
-                                            asChild
-                                            size="lg"
-                                            className="rounded-xl px-5 text-base">
-                                            <a href="https://wa.me/916283468927" target="_blank" rel="noreferrer">Hire Us</a>
-                                        </Button>
-                                    </div>
-                                    <Button
-                                        key={2}
-                                        asChild
-                                        size="lg"
-                                        variant="ghost"
-                                        className="h-10.5 rounded-xl px-5">
-                                        <a href="#services">
-                                            <span className="text-nowrap">Browse Services</span>
-                                        </a>
-                                    </Button>
-                                </AnimatedGroup>
-                            </div>
+                        <div className="px-2 sm:px-6 lg:px-0">
+                            <HeroVisual />
                         </div>
                     </div>
-                </section>
-            </main >
+
+                    <div className="border-border/80 mt-16 border-t pt-10 md:mt-20">
+                        <Statistics />
+                    </div>
+                </div>
+            </section>
         </>
     )
 }

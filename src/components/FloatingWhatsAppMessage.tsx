@@ -1,54 +1,35 @@
-/**
- * Floating WhatsApp button
- *
- * Props:
- *  - phone: string (international number, e.g. "+918818060688")
- *  - message: string (prefilled message)
- *  - size: number (square px size of the button, default 56)
- */
+import { site } from "@/lib/site";
+
+/** Floating WhatsApp button, bottom-right. Uses the number from lib/site. */
 export default function FloatingWhatsApp({
-    phone = "+91-8818060688",
     message = "Hi! I would like to know about your services.",
     size = 56,
+}: {
+    message?: string;
+    size?: number;
 }) {
-    // normalize phone to digits only for wa.me
-    const digits = phone.replace(/[^\d+]/g, "").replace(/^\+/, "");
-    const waLink = `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
-
-    // inline style for safe-area bottom inset (iOS)
-    const safeAreaStyle = {
-        marginBottom: `calc(env(safe-area-inset-bottom, 0px) + 16px)`,
-    };
-
     return (
         <a
-            href={waLink}
+            href={site.whatsapp(message)}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Contact us"
-            title="Contact us"
-            style={safeAreaStyle}
-            className="fixed right-4 bottom-4 z-50 sm:right-6 sm:bottom-6"
+            aria-label="Chat with us on WhatsApp"
+            title="Chat with us on WhatsApp"
+            style={{ marginBottom: "calc(env(safe-area-inset-bottom, 0px) + 16px)" }}
+            className="group fixed bottom-4 right-4 z-50 flex items-center gap-3 sm:bottom-6 sm:right-6"
         >
-            <div
-                className="relative flex items-center justify-center  transition-transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400"
+            <span className="bg-foreground text-background pointer-events-none hidden rounded-full px-3 py-1.5 text-xs font-medium opacity-0 shadow-md transition-all duration-200 group-hover:opacity-100 md:block">
+                Chat with us
+            </span>
+            <span
+                className="relative grid place-items-center rounded-full bg-[#25D366] shadow-[0_10px_30px_-10px_rgba(37,211,102,0.8)] transition-transform group-hover:scale-105 group-active:scale-95"
                 style={{ height: size, width: size }}
-                role="button"
-                tabIndex={0}
             >
-                {/* subtle halo for attention */}
-                <span className="absolute -inset-1 rounded-full bg-green-600/30 blur-sm opacity-60" aria-hidden />
-
-                {/* WhatsApp SVG icon */}
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-                    <path fill="#fff" d="M4.9,43.3l2.7-9.8C5.9,30.6,5,27.3,5,24C5,13.5,13.5,5,24,5c5.1,0,9.8,2,13.4,5.6	C41,14.2,43,18.9,43,24c0,10.5-8.5,19-19,19c0,0,0,0,0,0h0c-3.2,0-6.3-0.8-9.1-2.3L4.9,43.3z"></path><path fill="#fff" d="M4.9,43.8c-0.1,0-0.3-0.1-0.4-0.1c-0.1-0.1-0.2-0.3-0.1-0.5L7,33.5c-1.6-2.9-2.5-6.2-2.5-9.6	C4.5,13.2,13.3,4.5,24,4.5c5.2,0,10.1,2,13.8,5.7c3.7,3.7,5.7,8.6,5.7,13.8c0,10.7-8.7,19.5-19.5,19.5c-3.2,0-6.3-0.8-9.1-2.3	L5,43.8C5,43.8,4.9,43.8,4.9,43.8z"></path><path fill="#cfd8dc" d="M24,5c5.1,0,9.8,2,13.4,5.6C41,14.2,43,18.9,43,24c0,10.5-8.5,19-19,19h0c-3.2,0-6.3-0.8-9.1-2.3	L4.9,43.3l2.7-9.8C5.9,30.6,5,27.3,5,24C5,13.5,13.5,5,24,5 M24,43L24,43L24,43 M24,43L24,43L24,43 M24,4L24,4C13,4,4,13,4,24	c0,3.4,0.8,6.7,2.5,9.6L3.9,43c-0.1,0.3,0,0.7,0.3,1c0.2,0.2,0.4,0.3,0.7,0.3c0.1,0,0.2,0,0.3,0l9.7-2.5c2.8,1.5,6,2.2,9.2,2.2	c11,0,20-9,20-20c0-5.3-2.1-10.4-5.8-14.1C34.4,6.1,29.4,4,24,4L24,4z"></path><path fill="#40c351" d="M35.2,12.8c-3-3-6.9-4.6-11.2-4.6C15.3,8.2,8.2,15.3,8.2,24c0,3,0.8,5.9,2.4,8.4L11,33l-1.6,5.8	l6-1.6l0.6,0.3c2.4,1.4,5.2,2.2,8,2.2h0c8.7,0,15.8-7.1,15.8-15.8C39.8,19.8,38.2,15.8,35.2,12.8z"></path><path fill="#fff" fill-rule="evenodd" d="M19.3,16c-0.4-0.8-0.7-0.8-1.1-0.8c-0.3,0-0.6,0-0.9,0	s-0.8,0.1-1.3,0.6c-0.4,0.5-1.7,1.6-1.7,4s1.7,4.6,1.9,4.9s3.3,5.3,8.1,7.2c4,1.6,4.8,1.3,5.7,1.2c0.9-0.1,2.8-1.1,3.2-2.3	c0.4-1.1,0.4-2.1,0.3-2.3c-0.1-0.2-0.4-0.3-0.9-0.6s-2.8-1.4-3.2-1.5c-0.4-0.2-0.8-0.2-1.1,0.2c-0.3,0.5-1.2,1.5-1.5,1.9	c-0.3,0.3-0.6,0.4-1,0.1c-0.5-0.2-2-0.7-3.8-2.4c-1.4-1.3-2.4-2.8-2.6-3.3c-0.3-0.5,0-0.7,0.2-1c0.2-0.2,0.5-0.6,0.7-0.8	c0.2-0.3,0.3-0.5,0.5-0.8c0.2-0.3,0.1-0.6,0-0.8C20.6,19.3,19.7,17,19.3,16z" clip-rule="evenodd"></path>
+                <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366]/40 [animation-duration:2.4s]" aria-hidden />
+                <svg viewBox="0 0 24 24" className="relative size-7 fill-white" aria-hidden>
+                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2m.01 1.67c4.54 0 8.23 3.7 8.23 8.24 0 4.54-3.69 8.23-8.23 8.23-1.5 0-2.97-.41-4.25-1.18l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.2 8.3-8.2M8.53 7.33c-.16 0-.43.06-.66.31-.22.25-.87.86-.87 2.07 0 1.22.89 2.39 1 2.56.14.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.12-.24-.01-.39.11-.5.11-.11.27-.29.37-.44.13-.14.17-.25.25-.41.08-.17 0-.32-.05-.45-.06-.12-.54-1.34-.76-1.83-.2-.48-.4-.42-.56-.43-.14 0-.3-.01-.47-.01" />
                 </svg>
-
-                {/* Desktop label (hidden on small screens) */}
-                <span className="pointer-events-none absolute right-full mr-1 hidden max-w-xs items-center gap-3 whitespace-nowrap rounded-full bg-black/80 px-3 py-1 text-xs font-medium text-white shadow-sm md:flex">
-                    Chat with us
-                </span>
-            </div>
+            </span>
         </a>
     );
 }
