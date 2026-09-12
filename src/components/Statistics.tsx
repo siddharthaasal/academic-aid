@@ -2,10 +2,10 @@ import React from "react";
 
 export default function Statistics() {
     const stats = [
-        { id: "mini-projects", value: 35, label: "Mini Projects", prefix: "+" },
-        { id: "papers-delivered", value: 450, label: "Research Papers Delivered", prefix: "+" },
-        { id: "papers-published", value: 75, label: "Research Papers Published", prefix: "+" },
-        { id: "courses", value: 250, label: "LinkedIn / Coursera Courses", prefix: "+" },
+        { id: "mini-projects", value: 175, label: "Mini Projects", prefix: "+" },
+        { id: "papers-delivered", value: 1450, label: "Research Papers Delivered", prefix: "+" },
+        { id: "papers-published", value: 875, label: "Research Papers Published", prefix: "+" },
+        { id: "courses", value: 900, label: "LinkedIn / Coursera Courses", prefix: "+" },
     ];
 
     const [display, setDisplay] = React.useState(() => stats.map(() => 0));
