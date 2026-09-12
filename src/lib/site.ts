@@ -6,7 +6,7 @@ const WHATSAPP_DIGITS = "918818060688";
 
 export const site = {
     name: "academic-aid",
-    url: "https://www.academic-aid.xyz",
+    url: "https://www.academic-aid.in",
     email: "researchhardiksharma@gmail.com",
     phoneDisplay: "+91 88180 60688",
     phoneTel: "+918818060688",
