@@ -1,91 +1,75 @@
 import React from "react";
 
-export default function Statistics() {
-    const stats = [
-        { id: "mini-projects", value: 35, label: "Mini Projects", prefix: "+" },
-        { id: "papers-delivered", value: 450, label: "Research Papers Delivered", prefix: "+" },
-        { id: "papers-published", value: 75, label: "Research Papers Published", prefix: "+" },
-        { id: "courses", value: 250, label: "LinkedIn / Coursera Courses", prefix: "+" },
-    ];
+const stats = [
+    { id: "papers-delivered", value: 1450, label: "Research papers delivered" },
+    { id: "papers-published", value: 875, label: "Papers published" },
+    { id: "courses", value: 900, label: "Courses completed" },
+    { id: "mini-projects", value: 175, label: "Mini projects shipped" },
+];
 
+/** Trust strip. Counts up once when it scrolls into view. */
+export default function Statistics() {
     const [display, setDisplay] = React.useState(() => stats.map(() => 0));
-    const containerRef = React.useRef(null);
-    const startedRef = React.useRef(false);
+    const ref = React.useRef<HTMLDivElement>(null);
+    const started = React.useRef(false);
 
     React.useEffect(() => {
-        const el = containerRef.current;
+        const el = ref.current;
         if (!el) return;
-
         const obs = new IntersectionObserver(
             (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && !startedRef.current) {
-                        startedRef.current = true;
-                        runCountUp();
-                        obs.disconnect();
-                    }
-                });
+                if (entries.some((e) => e.isIntersecting) && !started.current) {
+                    started.current = true;
+                    runCountUp();
+                    obs.disconnect();
+                }
             },
-            { threshold: 0.25 }
+            { threshold: 0.3 }
         );
-
         obs.observe(el);
-        return () => obs.disconnect();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // Fallback: if the observer never fires (reduced motion, odd viewports), show final values.
+        const fallback = window.setTimeout(() => {
+            if (!started.current) {
+                started.current = true;
+                setDisplay(stats.map((s) => s.value));
+                obs.disconnect();
+            }
+        }, 2500);
+        return () => {
+            obs.disconnect();
+            window.clearTimeout(fallback);
+        };
     }, []);
 
     function runCountUp() {
-        const duration = 1200;
+        const duration = 1400;
         const start = performance.now();
-
-        function frame(now: any) {
-            const elapsed = now - start;
-            const t = Math.min(1, elapsed / duration);
+        const frame = (now: number) => {
+            const t = Math.min(1, (now - start) / duration);
             const eased = 1 - Math.pow(1 - t, 3);
-
-            const newVals = stats.map((s) =>
-                Math.round(s.value * eased)
-            );
-            setDisplay(newVals);
-
+            setDisplay(stats.map((s) => Math.round(s.value * eased)));
             if (t < 1) requestAnimationFrame(frame);
-            else setDisplay(stats.map((s) => s.value));
-        }
-
+        };
         requestAnimationFrame(frame);
     }
 
     return (
-        <section ref={containerRef} className="py-6">
-            <div className="mx-auto max-w-5xl px-6">
-                {/* Add dividers: vertical on md+, horizontal on mobile */}
-                <div className="grid gap-8 text-center divide-y divide-gray-200 sm:grid-cols-2 sm:divide-y-0 sm:divide-x md:grid-cols-4">
-                    {stats.map((stat, idx) => (
-                        <div
-                            key={stat.id}
-                            role="listitem"
-                            className="flex flex-col items-center justify-center space-y-2 px-4 py-6"
-                        >
-                            <div
-                                className="text-4xl font-extrabold leading-tight md:text-5xl"
-                                aria-hidden="true"
-                            >
-                                <span>{stat.prefix}</span>
-                                <span>{display[idx].toLocaleString()}</span>
-                            </div>
-
-                            <p className="text-sm text-muted-foreground max-w-[10rem]">
-                                {stat.label}
-                            </p>
-
-                            <span className="sr-only" aria-live="polite">
-                                {stat.prefix}
-                                {display[idx]} {stat.label}
-                            </span>
-                        </div>
-                    ))}
+        <div ref={ref} className="grid grid-cols-2 gap-y-8 md:grid-cols-4">
+            {stats.map((stat, i) => (
+                <div
+                    key={stat.id}
+                    className="border-border/80 flex flex-col items-center px-4 text-center md:items-start md:border-l md:text-left md:first:border-l-0 md:first:pl-0"
+                >
+                    <div className="font-display text-4xl leading-none tracking-tight tabular-nums md:text-5xl" aria-hidden>
+                        {display[i].toLocaleString("en-IN")}
+                        <span className="text-brand-strong">+</span>
+                    </div>
+                    <p className="text-muted-foreground mt-2 text-sm">{stat.label}</p>
+                    <span className="sr-only">
+                        {stat.value.toLocaleString("en-IN")}+ {stat.label}
+                    </span>
                 </div>
-            </div>
-        </section>
+            ))}
+        </div>
     );
 }

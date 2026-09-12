@@ -1,113 +1,123 @@
 import ServiceCard from "./ServiceCard";
-import { Book, BookOpen, BookCheck, Code, BookText, FileUser, LucideLinkedin, BookOpenCheck } from 'lucide-react';
+import SectionHeading from "./SectionHeading";
+import { Book, BookOpen, BookCheck, Code, BookText, FileUser, Award, GraduationCap } from "lucide-react";
 
-
-const services = [
+const tracks = [
     {
-        icon: <BookOpen />,
-        title: "Research Papers",
-        duration: "2–4 days",
-        description:
-            "Complete research papers tailored for coursework, conferences, or journals.",
-        items: ["IEEE Format", "With Graphs & Diagrams", "Optimized Plagarism"],
-        startingAt: "Rs.1499",
-        ctaLabel: "See Demo",
+        id: "research",
+        index: "01",
+        title: "Research & publishing",
+        blurb: "From a blank page to an acceptance mail. Written to your rubric or the venue's template.",
+        services: [
+            {
+                icon: <BookOpen />,
+                title: "Research Papers",
+                duration: "2–4 days",
+                description: "Complete papers for coursework, conferences or journals, in the venue's template.",
+                items: ["IEEE format by default", "Graphs, tables & diagrams", "Low similarity score"],
+                price: 1499,
+                popular: true,
+            },
+            {
+                icon: <BookCheck />,
+                title: "Research Publication",
+                duration: "1–4 days",
+                description: "We submit your paper to Scopus-indexed or IEEE conferences and manage it through to the decision.",
+                items: ["Scopus-indexed conferences", "Submission handled end to end", "Acceptance mail forwarded to you"],
+                price: 999,
+            },
+            {
+                icon: <Book />,
+                title: "Book Chapter Writing",
+                duration: "2–4 days",
+                description: "Chapter drafting with figures, formatting and citations that match the publisher's guidelines.",
+                items: ["Complete draft", "Low plagiarism & AI score", "Proper citations"],
+                price: 1199,
+            },
+            {
+                icon: <GraduationCap />,
+                title: "Thesis Writing",
+                duration: "3–7 days",
+                description: "A full thesis draft with your university's formatting, citations and originality checks.",
+                items: ["Full thesis draft", "Low plagiarism & AI score", "Proper citations"],
+                price: 14999,
+            },
+        ],
     },
     {
-        icon: <Book />,
-        title: "Book Chapter Writing",
-        duration: "2–4 days",
-        description:
-            "Complete chapter drafting with proper figures, graphs, formatting, and citations.",
-        items: ["Proper Draft", "Optimized Plagarism & AI", "Proper Citations"],
-        startingAt: "Rs.1199",
-        ctaLabel: "See Demo",
+        id: "projects",
+        index: "02",
+        title: "Projects & reports",
+        blurb: "Working code you can demo, and a report that fits the rubric.",
+        services: [
+            {
+                icon: <Code />,
+                title: "Mini Projects",
+                duration: "1 week",
+                description: "An end-to-end working project with source code and a live deployment link.",
+                items: ["Working code", "Deployment link", "Walkthrough of how it works"],
+                price: 499,
+            },
+            {
+                icon: <BookText />,
+                title: "Project Reports",
+                duration: "2–3 days",
+                description: "Well-researched technical reports that explain your project the way examiners expect.",
+                items: ["Rubric format", "Graphs, algorithms & diagrams", "65+ pages"],
+                price: 899,
+            },
+        ],
     },
     {
-        icon: <BookOpenCheck />,
-        title: "Thesis Writing",
-        duration: "3-7 days",
-        description:
-            "Complete thesis drafting with proper formatting, citations, and plagiarism-free content.",
-        items: ["Full Thesis Draft", "Optimized Plagarism & AI", "Proper Citations"],
-        startingAt: "Rs.14,999",
-        ctaLabel: "See Demo",
-    },
-    {
-        icon: <BookCheck />,
-        title: "Research Publication",
-        duration: "1-4 days",
-        description:
-            "Submission of your Research and bringing guaranteed acceptance. ",
-        items: ["SCOPUS Conferences", "Acceptance Mail"],
-        startingAt: "Rs.999",
-        ctaLabel: "See Demo",
-    },
-    {
-        icon: <Code />,
-        title: "Mini Projects",
-        duration: "1 week",
-        description:
-            "End-to-end project",
-        items: ["Working Code", "Deployment Link"],
-        startingAt: "Rs.499",
-        ctaLabel: "See Demo",
-    },
-    {
-        icon: <BookText />,
-        title: "Project Reports",
-        duration: "2–3 days",
-        description:
-            "Well-researched technical reports written to brief your Project",
-        items: ["Rubric Format", "With Garphs, Algorithms & Diagrams", "65+ Pages"],
-        startingAt: "Rs.899",
-        ctaLabel: "See Demo",
-    },
-    {
-        icon: <FileUser />,
-        title: "Resumes & LinkedIn",
-        duration: "1-2 days",
-        description:
-            "Career-ready resumes and LinkedIn profiles for Off-Campus Placements",
-        items: ["ATS-friendly resume", "LinkedIn rewrite", "Project highlights"],
-        startingAt: "Rs.499",
-        ctaLabel: "See Demo",
-    },
-    {
-        icon: <LucideLinkedin />,
-        title: "Courses & Certificates",
-        duration: "1 day",
-        description:
-            "Completing Coursera/LinkedIn/whatever virtual courses and assignments.",
-        items: ["Course Certificates", "Course Assignments", "Peer Graded Assignments"],
-        startingAt: "Rs.250",
-        ctaLabel: "See Demo",
+        id: "career",
+        index: "03",
+        title: "Career & courses",
+        blurb: "For placements and the certificates that go with them.",
+        services: [
+            {
+                icon: <FileUser />,
+                title: "Resumes & LinkedIn",
+                duration: "1–2 days",
+                description: "Career-ready resumes and LinkedIn profiles built for off-campus placements.",
+                items: ["ATS-friendly resume", "LinkedIn rewrite", "Project highlights"],
+                price: 499,
+            },
+            {
+                icon: <Award />,
+                title: "Courses & Certificates",
+                duration: "1 day",
+                description: "We complete Coursera, LinkedIn Learning and similar online courses, including graded assignments.",
+                items: ["Course certificate", "Course assignments", "Peer-graded assignments"],
+                price: 250,
+            },
+        ],
     },
 ];
 
 export default function ServicesGrid() {
     return (
-        <section className="pt-12">
+        <section className="py-20 md:py-28">
             <div className="mx-auto max-w-6xl px-6">
-                <div className="mx-auto mb-10 max-w-2xl text-center">
-                    <h2 className="text-3xl font-semibold md:text-4xl">Our Services</h2>
-                    <p className="text-muted-foreground mt-3">
-                        Fast, reliable, and affordable academic support — pick a service and hand us the deadline.
-                    </p>
-                </div>
+                <SectionHeading
+                    eyebrow="Services"
+                    title="Pick a service, hand us the deadline."
+                    description="Starting prices below. Every price is negotiable depending on scope, deadline and volume."
+                />
 
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
-                    {services.map((svc) => (
-                        <ServiceCard
-                            icon={svc.icon}
-                            key={svc.title}
-                            title={svc.title}
-                            duration={svc.duration}
-                            description={svc.description}
-                            items={svc.items}
-                            startingAt={svc.startingAt}
-                            ctaLabel={svc.ctaLabel}
-                        />
+                <div className="mt-16 space-y-16">
+                    {tracks.map((track) => (
+                        <div key={track.id} className="grid gap-8 lg:grid-cols-[240px_1fr] lg:gap-12">
+                            <div className="lg:sticky lg:top-28 lg:self-start">
+                                <p className="font-display text-brand-strong text-2xl italic">{track.index}</p>
+                                <h3 className="font-display mt-2 text-3xl leading-tight tracking-tight">{track.title}</h3>
+                                <p className="text-muted-foreground mt-3 text-pretty">{track.blurb}</p>
+                            </div>
+                            <div className="grid gap-5 sm:grid-cols-2">
+                                {track.services.map((svc) => (
+                                    <ServiceCard key={svc.title} {...svc} />
+                                ))}
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>

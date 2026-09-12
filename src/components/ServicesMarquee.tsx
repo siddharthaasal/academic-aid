@@ -1,33 +1,28 @@
 import Marquee from "react-fast-marquee"
-import { GraduationCap, FileText, BookOpen, Briefcase, ClipboardList } from "lucide-react"
 
-const services = [
-    { label: "Research Papers", icon: <FileText className="size-4 mr-2" /> },
-    { label: "Journal Publications", icon: <BookOpen className="size-4 mr-2" /> },
-    { label: "Book Chapters", icon: <BookOpen className="size-4 mr-2" /> },
-    { label: "Capstone Projects", icon: <Briefcase className="size-4 mr-2" /> },
-    { label: "Mini Projects", icon: <ClipboardList className="size-4 mr-2" /> },
-    { label: "Reports", icon: <FileText className="size-4 mr-2" /> },
-    { label: "Resumes & LinkedIn", icon: <GraduationCap className="size-4 mr-2" /> },
-    { label: "Courses & Certificates", icon: <BookOpen className="size-4 mr-2" /> },
+const items = [
+    "IEEE format",
+    "Scopus-indexed conferences",
+    "Springer book chapters",
+    "Thesis & dissertations",
+    "Coursera & LinkedIn Learning",
+    "Plagiarism-checked",
+    "Free revisions",
+    "Deployed mini projects",
+    "65+ page project reports",
+    "ATS-friendly resumes",
 ]
 
+/** Thin trust strip under the hero: what we format for, what we check. */
 export default function ServicesMarquee() {
     return (
-        <section className="bg-background">
+        <section aria-label="What we cover" className="border-border/80 border-y py-5">
             <div className="mx-auto max-w-6xl px-6">
-                <Marquee
-                    pauseOnHover
-                    gradient
-                    gradientColor="var(--color-background)"
-                    speed={50}
-                >
-                    {services.map((service, idx) => (
-                        <span
-                            key={idx}
-                            className="mx-4 inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium shadow-sm backdrop-blur-sm"
-                        >
-                            {service.icon} {service.label}
+                <Marquee pauseOnHover gradient gradientColor="var(--color-background)" gradientWidth={80} speed={40}>
+                    {items.map((label) => (
+                        <span key={label} className="text-muted-foreground mx-5 inline-flex items-center gap-3 text-sm font-medium">
+                            <span className="bg-brand size-1.5 rounded-full" aria-hidden />
+                            {label}
                         </span>
                     ))}
                 </Marquee>

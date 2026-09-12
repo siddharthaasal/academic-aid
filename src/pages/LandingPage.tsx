@@ -1,13 +1,13 @@
 import HeroSection from "@/sections/HeroSection"
-import Statistics from '@/components/Statistics'
-import ServicesGrid from '@/components/ServicesGrid'
-import Faq from '@/components/Faq'
-import Testimonials from '@/components/Testimonials'
-import { Contact } from '@/components/Contact'
-import Footer from '@/components/Footer'
+import ServicesMarquee from "@/components/ServicesMarquee"
+import ServicesGrid from "@/components/ServicesGrid"
+import HowItWorks from "@/components/HowItWorks"
+import Testimonials from "@/components/Testimonials"
+import Faq from "@/components/Faq"
+import { Contact } from "@/components/Contact"
+import Footer from "@/components/Footer"
 import FloatingWhatsApp from "@/components/FloatingWhatsAppMessage"
 
-// LandingPage.jsx
 export default function LandingPage() {
     return (
         <>
@@ -15,34 +15,31 @@ export default function LandingPage() {
                 <HeroSection />
             </section>
 
-            <section id="statistics" className="py-12">
-                <Statistics />
-            </section>
+            <ServicesMarquee />
 
-            <section id="services" className="py-12">
+            <section id="services">
                 <ServicesGrid />
             </section>
 
-            <section id="testimonials" className="py-12">
+            <section id="how-it-works">
+                <HowItWorks />
+            </section>
+
+            <section id="testimonials">
                 <Testimonials />
             </section>
 
-            <section id="faq" className="py-12">
+            <section id="faq">
                 <Faq />
             </section>
 
-            <section id="contact" className="py-12 mx-auto max-w-6xl">
+            <section id="contact">
                 <Contact />
             </section>
 
-            <section className="py-12">
-                <Footer />
-            </section>
+            <Footer />
 
-            <FloatingWhatsApp
-                phone="+91-8818060688" // replace with your number (international)
-                message="Hello, I need help with a research paper." // optional
-            />
+            <FloatingWhatsApp message="Hello, I need help with a research paper." />
         </>
     )
 }
