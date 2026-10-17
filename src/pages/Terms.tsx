@@ -1,3 +1,5 @@
+import { site } from "@/lib/site";
+
 const heading = {
     h1: 'font-sans text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight',
     h2: 'font-sans text-2xl sm:text-3xl font-semibold leading-tight mt-6',
@@ -99,7 +101,7 @@ export default function Terms({ lastUpdated = 'September 10, 2025' }) {
 
                 <h2 className={heading.h2}>13. Contact</h2>
                 <p>
-                    If you have questions about these Terms, please contact us at <a href="mailto:researchhardiksharma@gmail.com" className="hover:underline">researchhardiksharma@gmail.com</a>.
+                    If you have questions about these Terms, please contact us at <a href={`mailto:${site.email}`} className="hover:underline">{site.email}</a>.
                 </p>
 
                 <h2 className={heading.h2}>14. Acknowledgement</h2>
